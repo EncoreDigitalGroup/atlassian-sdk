@@ -15,7 +15,5 @@ class AtlassianServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../../config/atlassian.php', 'atlassian');
     }
 
-    public function boot(): void
-    {
-    }
+    public function boot(): void {}
 }
