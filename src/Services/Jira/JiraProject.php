@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Http;
 
 /**
  * @experimental
+ *
  * @api
  */
 class JiraProject
