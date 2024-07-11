@@ -1,0 +1,21 @@
+name: Release
+
+on:
+    push:
+        tags:
+            - 'v[0-9]+.[0-9]+.[0-9]+'
+            - '!v[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'
+
+permissions: write-all
+
+jobs:
+    CreateRelease:
+        name: Create Release
+        uses: EncoreDigitalGroup/ci-workflows/.github/workflows/createRelease.yml@v1
+        permissions:
+            contents: write
+        with:
+            generateReleaseNotes: true
+            isDraft: false
+        secrets:
+            token: ${{ secrets.GITHUB_TOKEN }}

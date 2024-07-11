@@ -1,0 +1,11 @@
+{
+    "include": [
+        "app",
+        "app_modules",
+        "operations",
+        "routes"
+    ],
+    "exclude": [
+        "tests"
+    ]
+}

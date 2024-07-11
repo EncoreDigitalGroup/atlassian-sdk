@@ -1,0 +1,40 @@
+name: Pull Request
+
+on:
+    pull_request_target:
+    workflow_dispatch:
+
+permissions:
+    contents: write
+    pull-requests: write
+
+jobs:
+    Duster:
+        name: Duster
+        uses: EncoreDigitalGroup/ci-workflows/.github/workflows/dusterFixBlame.yml@v1
+        permissions:
+            contents: write
+            pull-requests: write
+
+    StaticAnalysis:
+        needs: Duster
+        name: StaticAnalysis
+        uses: EncoreDigitalGroup/ci-workflows/.github/workflows/larastan.yml@v1
+        with:
+            phpVersion: '8.3'
+            path: 'src/'
+            branch: ${{ github.head_ref }}
+
+    #    Test:
+    #        needs: Duster
+    #        name: Test
+    #        uses: EncoreDigitalGroup/ci-workflows/.github/workflows/pest.yml@v1
+    #        with:
+    #            phpVersion: '8.3'
+    #            branch: ${{ github.head_ref }}
+    #            enforceCoverage: false
+
+    AutoMerge:
+        needs: [ StaticAnalysis ]
+        name: AutoMerge
+        uses: EncoreDigitalGroup/ci-workflows/.github/workflows/dependabotAutoMerge.yml@v1
