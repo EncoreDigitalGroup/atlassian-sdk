@@ -10,7 +10,7 @@ namespace EncoreDigitalGroup\Atlassian\Services\Jira;
 /** @api */
 class JiraHelper
 {
-    public function getKeyFromSmartLink(string $smartLink): ?string
+    public static function getKeyFromSmartLink(string $smartLink): ?string
     {
         $pattern = '/https:\/\/[a-zA-Z0-9.-]+\/browse\/([A-Z]+-\d+)|/';
 
