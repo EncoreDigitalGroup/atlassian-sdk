@@ -1,6 +1,6 @@
 # EncoreDigitalGroup/Atlassian-Sdk
 
-This Atlassian SDK developer by [Encore Digital Group](https://github.com/EncoreDigitalGroup) provides a strongly typed method of interacting with Atlassian Products.
+This Atlassian SDK developed by [Encore Digital Group](https://github.com/EncoreDigitalGroup) provides a strongly typed method of interacting with Atlassian Products.
 
 # We Love Laravel
 
@@ -9,10 +9,10 @@ For now, this SDK is built for use with Laravel only. However, we are working on
 
 # What's Included
 
-Encore Digital Group has a number of PHP libraries, separate from PHPGenesis, that are included in PHPGenesis. Some of these libraries include:
+Atlassian offers a number of cloud products, this SDK includes:
 
 - [Jira Cloud](https://developer.atlassian.com/cloud/jira/platform/rest/v2/)
-
+- More Upon Request or PR
 
 # Installation
 
