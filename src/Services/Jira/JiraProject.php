@@ -3,7 +3,7 @@
 /*
 * Copyright (c) 2024. Encore Digital Group.
 * All Right Reserved.
- */
+*/
 
 namespace EncoreDigitalGroup\Atlassian\Services\Jira;
 
@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Http;
 
 /**
 * @experimental
- *
+*
 * @api
- */
+*/
 class JiraProject
 {
     public function __construct(
