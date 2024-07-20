@@ -1,4 +1,6 @@
-# EncoreDigitalGroup/Atlassian-Sdk
+---
+-   title: Overview
+---
 
 This Atlassian SDK developed by [Encore Digital Group](https://github.com/EncoreDigitalGroup) provides a strongly typed method of interacting with Atlassian Products.
 
