@@ -1,6 +1,8 @@
 ---
--   title: Overview
+title: Overview
 ---
+
+# EncoreDigitalGroup/Atlassian-Sdk
 
 This Atlassian SDK developed by [Encore Digital Group](https://github.com/EncoreDigitalGroup) provides a strongly typed method of interacting with Atlassian Products.
 
@@ -35,4 +37,4 @@ This SDK is built with backwards compatibility in mind. Encore Digital Group fol
 
 # License
 
-License information can be found in the [LICENSE.md](/LICENSE.md) file.
+License information can be found [here](https://docs.encoredigitalgroup.com/LicenseTerms/) file.
