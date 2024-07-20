@@ -1,8 +1,8 @@
 <?php
 
 /*
-* Copyright (c) 2024. Encore Digital Group.
-* All Right Reserved.
+ * Copyright (c) 2024. Encore Digital Group.
+ * All Right Reserved.
 */
 
 namespace EncoreDigitalGroup\Atlassian\Services\Jira;
@@ -18,9 +18,9 @@ use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Projects\Project;
 use Illuminate\Support\Facades\Http;
 
 /**
-* @experimental
-*
-* @api
+ * @experimental
+ *
+ * @api
 */
 class JiraProject
 {
