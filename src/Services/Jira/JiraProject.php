@@ -24,14 +24,20 @@ use Illuminate\Support\Facades\Http;
  */
 class JiraProject
 {
-    public static function getIssues(string $projectKey, int $startAt = 0, int $maxResults = 50): IssueSearchQueryResult
-    {
-        $hostname = AtlassianHelper::getHostname();
-        $username = AtlassianHelper::getUsername();
-        $token = AtlassianHelper::getToken();
+    public function __construct(
+        public ?string $hostname = null,
+        public ?string $username = null,
+        public ?string $token = null,
+    ) {
+        $this->hostname = $hostname ?? AtlassianHelper::getHostname();
+        $this->username = $username ?? AtlassianHelper::getUsername();
+        $this->token = $token ?? AtlassianHelper::getToken();
+    }
 
-        $response = Http::withBasicAuth($username, $token)
-            ->get($hostname . '/rest/api/2/search', [
+    public function getIssues(string $projectKey, int $startAt = 0, int $maxResults = 50): IssueSearchQueryResult
+    {
+        $response = Http::withBasicAuth($this->username, $this->token)
+            ->get($this->hostname . '/rest/api/2/search', [
                 'jql' => 'project=' . $projectKey,
                 'startAt' => $startAt,
                 'maxResults' => $maxResults,
@@ -53,7 +59,7 @@ class JiraProject
         return $issueSearchQueryResult;
     }
 
-    private static function mapIssues(mixed $data): Issue
+    private function mapIssues(mixed $data): Issue
     {
         $issue = new Issue();
         $issue->expand = $data->expand;
