@@ -15,6 +15,7 @@ use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueSearchQueryRe
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueStatus;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueType;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Projects\Project;
+use EncoreDigitalGroup\StdLib\Exceptions\NullExceptions\ClassPropertyNullException;
 use Illuminate\Support\Facades\Http;
 
 /**
@@ -41,6 +42,14 @@ class JiraProject
 
     public function getIssues(string $projectKey, int $startAt = 0, int $maxResults = 50): IssueSearchQueryResult
     {
+        if (is_null($this->username)) {
+            throw new ClassPropertyNullException('username');
+        }
+
+        if (is_null($this->token)) {
+            throw new ClassPropertyNullException('token');
+        }
+
         $response = Http::withBasicAuth($this->username, $this->token)
             ->get($this->hostname . '/rest/api/2/search', [
                 'jql' => 'project=' . $projectKey,
