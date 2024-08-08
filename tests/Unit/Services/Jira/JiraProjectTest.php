@@ -4,6 +4,12 @@ use EncoreDigitalGroup\Atlassian\Services\Jira\JiraProject;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueSearchQueryResult;
 use Illuminate\Support\Facades\Http;
 
+test('make returns instance of JiraProject', function () {
+    $jiraProject = JiraProject::make();
+
+    expect($jiraProject)->toBeInstanceOf(JiraProject::class);
+});
+
 test('getIssues returns the correct instance of IssueSearchQueryResult with valid data', function () {
     Http::fake([
         'https://example.atlassian.net/rest/api/2/search*' => Http::response([
