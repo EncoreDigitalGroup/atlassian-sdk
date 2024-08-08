@@ -34,6 +34,11 @@ class JiraProject
         $this->token = $token ?? AtlassianHelper::getToken();
     }
 
+    public static function make(?string $hostname = null, ?string $username = null, ?string $token = null)
+    {
+        return new self($hostname, $username, $token);
+    }
+
     public function getIssues(string $projectKey, int $startAt = 0, int $maxResults = 50): IssueSearchQueryResult
     {
         $response = Http::withBasicAuth($this->username, $this->token)
