@@ -34,7 +34,7 @@ class JiraProject
         $this->token = $token ?? AtlassianHelper::getToken();
     }
 
-    public static function make(?string $hostname = null, ?string $username = null, ?string $token = null)
+    public static function make(?string $hostname = null, ?string $username = null, ?string $token = null): JiraProject
     {
         return new self($hostname, $username, $token);
     }

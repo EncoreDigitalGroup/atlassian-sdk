@@ -64,7 +64,7 @@ test('getIssues returns the correct instance of IssueSearchQueryResult with vali
     ]);
 
     // Call the method under test
-    $result = JiraProject::getIssues('TEST');
+    $result = JiraProject::make()->getIssues('TEST');
 
     // Assertions
     expect($result)->toBeInstanceOf(IssueSearchQueryResult::class)
