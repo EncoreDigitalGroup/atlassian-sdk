@@ -39,13 +39,7 @@ class JiraProject
 
     public function getIssues(string $projectKey, int $startAt = 0, int $maxResults = 50): IssueSearchQueryResult
     {
-        if (is_null($this->username)) {
-            throw new ClassPropertyNullException('username');
-        }
-
-        if (is_null($this->token)) {
-            throw new ClassPropertyNullException('token');
-        }
+        AuthHelper::validate($this);
 
         $response = Http::withBasicAuth($this->username, $this->token)
             ->get($this->hostname . '/rest/api/2/search', [
