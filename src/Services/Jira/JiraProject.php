@@ -8,9 +8,10 @@
 namespace EncoreDigitalGroup\Atlassian\Services\Jira;
 
 use EncoreDigitalGroup\Atlassian\AtlassianHelper;
+use EncoreDigitalGroup\Atlassian\Helpers\AuthHelper;
+use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Issue;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueSearchQueryResult;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Traits\MapIssues;
-use EncoreDigitalGroup\StdLib\Exceptions\NullExceptions\ClassPropertyNullException;
 use Illuminate\Support\Facades\Http;
 
 /**
@@ -62,5 +63,16 @@ class JiraProject
         }
 
         return $issueSearchQueryResult;
+    }
+
+    public function createIssue(Issue $issue)
+    {
+        AuthHelper::validate($this);
+
+        $response = Http::withBasicAuth($this->username, $this->token)
+            ->post($this->hostname . '/rest/api/2/issue', $issue);
+
+        //TODO: Parse response and get the Jira Issue Object from API.
+        //TODO: Create getIssue() function to perform this operation.
     }
 }
