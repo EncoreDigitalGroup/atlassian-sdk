@@ -1,6 +1,8 @@
 <?php
 
 use EncoreDigitalGroup\Atlassian\Services\Jira\JiraProject;
+use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Issue;
+use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueFields;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueSearchQueryResult;
 use Illuminate\Support\Facades\Http;
 
@@ -11,58 +13,6 @@ test('make returns instance of JiraProject', function () {
 });
 
 test('getIssues returns the correct instance of IssueSearchQueryResult with valid data', function () {
-    Http::fake([
-        'https://example.atlassian.net/rest/api/2/search*' => Http::response([
-            "expand" => "schema,names",
-            "startAt" => 0,
-            "maxResults" => 50,
-            "total" => 2,
-            "issues" => [
-                [
-                    "expand" => "",
-                    "id" => "10001",
-                    "self" => "https://example.atlassian.net/rest/api/2/issue/10001",
-                    "key" => "TEST-1",
-                    "fields" => [
-                        "summary" => "Test Issue 1",
-                        "description" => "This is a test issue",
-                        "status" => [
-                            "self" => "https://example.atlassian.net/rest/api/2/status/10001",
-                            "description" => "Issue is open and ready for the assignee to start work on it.",
-                            "iconUrl" => "https://example.atlassian.net/",
-                            "name" => "Open",
-                            "id" => "10001",
-                        ],
-                        "priority" => [
-                            "self" => "https://example.atlassian.net/rest/api/2/priority/3",
-                            "iconUrl" => "https://example.atlassian.net/images/icons/priorities/medium.svg",
-                            "name" => "Medium",
-                            "id" => "3",
-                        ],
-                        "issuetype" => [
-                            "self" => "https://example.atlassian.net/rest/api/2/issuetype/10001",
-                            "id" => "10001",
-                            "description" => "",
-                            "iconUrl" => "https://example.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10001?size=medium",
-                            "name" => "Technical Debt",
-                            "subtask" => false,
-                            "avatarId" => 10001,
-                            "hierarchyLevel" => 0,
-                        ],
-                        "project" => [
-                            "self" => "https://example.atlassian.net/rest/api/2/project/1001",
-                            "id" => "10001",
-                            "key" => "TEST",
-                            "name" => "TEST PROJECT",
-                            "projectTypeKey" => "software",
-                            "simplified" => false,
-                        ],
-                    ],
-                ],
-            ],
-        ]),
-    ]);
-
     // Call the method under test
     $result = JiraProject::make()->getIssues('TEST');
 
@@ -73,5 +23,22 @@ test('getIssues returns the correct instance of IssueSearchQueryResult with vali
         ->and($result->issues)->toHaveCount(1)
         ->and($result->issues[0])->toHaveProperties(['id', 'key', 'fields'])
         ->and($result->issues[0]->key)->toEqual('TEST-1');
-    // Add more assertions as needed
+});
+
+test('createIssue returns the correct instance of Issue with valid data', function () {
+    // Call the method under test
+    $issue = new Issue();
+    $issue->fields = new IssueFields();
+    $issue->fields->summary = 'Test Issue 1';
+    $issue->fields->description = 'This is a test issue';
+
+    $result = JiraProject::make()->createIssue($issue);
+
+    // Assertions
+    expect($result)->toBeInstanceOf(Issue::class)
+        ->and($result->id)->toEqual('10001')
+        ->and($result->fields)->toBeInstanceOf(IssueFields::class)
+        ->and($result->fields->summary)->toEqual('Test Issue 1')
+        ->and($result->fields->description)->toEqual('This is a test issue')
+        ->and($result->key)->toEqual('TEST-1');
 });

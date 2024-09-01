@@ -8,14 +8,10 @@
 namespace EncoreDigitalGroup\Atlassian\Services\Jira;
 
 use EncoreDigitalGroup\Atlassian\AtlassianHelper;
+use EncoreDigitalGroup\Atlassian\Helpers\AuthHelper;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Issue;
-use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueFields;
-use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssuePriority;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueSearchQueryResult;
-use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueStatus;
-use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueType;
-use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Projects\Project;
-use EncoreDigitalGroup\StdLib\Exceptions\NullExceptions\ClassPropertyNullException;
+use EncoreDigitalGroup\Atlassian\Services\Jira\Traits\MapIssues;
 use Illuminate\Support\Facades\Http;
 
 /**
@@ -25,33 +21,33 @@ use Illuminate\Support\Facades\Http;
  */
 class JiraProject
 {
-    public function __construct(
-        public ?string $hostname = null,
-        public ?string $username = null,
-        public ?string $token = null,
-    ) {
-        $this->hostname = $hostname ?? AtlassianHelper::getHostname();
-        $this->username = $username ?? AtlassianHelper::getUsername();
-        $this->token = $token ?? AtlassianHelper::getToken();
+    use MapIssues;
+
+    public const string ISSUE_SEARCH_ENDPOINT = '/rest/api/2/search';
+    public const string ISSUE_ENDPOINT = '/rest/api/2/issue';
+
+    public function __construct(public string $hostname, public string $username, public string $token)
+    {
+        $this->hostname = $hostname ?: AtlassianHelper::getHostname();
+        $this->username = $username ?: AtlassianHelper::getUsername();
+        $this->token = $token ?: AtlassianHelper::getToken();
     }
 
     public static function make(?string $hostname = null, ?string $username = null, ?string $token = null): JiraProject
     {
-        return new self($hostname, $username, $token);
+        return new self(
+            $hostname ?: AtlassianHelper::getHostname(),
+            $username ?: AtlassianHelper::getUsername(),
+            $token ?: AtlassianHelper::getToken()
+        );
     }
 
     public function getIssues(string $projectKey, int $startAt = 0, int $maxResults = 50): IssueSearchQueryResult
     {
-        if (is_null($this->username)) {
-            throw new ClassPropertyNullException('username');
-        }
-
-        if (is_null($this->token)) {
-            throw new ClassPropertyNullException('token');
-        }
+        AuthHelper::validate($this);
 
         $response = Http::withBasicAuth($this->username, $this->token)
-            ->get($this->hostname . '/rest/api/2/search', [
+            ->get($this->hostname . self::ISSUE_SEARCH_ENDPOINT, [
                 'jql' => 'project=' . $projectKey,
                 'startAt' => $startAt,
                 'maxResults' => $maxResults,
@@ -67,51 +63,41 @@ class JiraProject
         $issueSearchQueryResult->issues = [];
 
         foreach ($response->issues as $issue) {
-            $issueSearchQueryResult->issues[] = self::mapIssues($issue);
+            $issueSearchQueryResult->issues[] = $this->mapIssues($issue);
         }
 
         return $issueSearchQueryResult;
     }
 
-    private function mapIssues(mixed $data): Issue
+    public function createIssue(Issue $issue): Issue
     {
-        $issue = new Issue();
-        $issue->expand = $data->expand;
-        $issue->id = $data->id;
-        $issue->self = $data->self;
-        $issue->key = $data->key;
-        $issue->fields = new IssueFields();
+        AuthHelper::validate($this);
 
-        $issue->fields->status = new IssueStatus();
-        $issue->fields->status->self = $data->fields->status->self;
-        $issue->fields->status->description = $data->fields->status->description;
-        $issue->fields->status->iconUrl = $data->fields->status->iconUrl;
-        $issue->fields->status->name = $data->fields->status->name;
-        $issue->fields->status->id = $data->fields->status->id;
+        /** @var string $issueJson */
+        $issueJson = json_encode($issue);
 
-        $issue->fields->priority = new IssuePriority();
-        $issue->fields->priority->self = $data->fields->priority->self;
-        $issue->fields->priority->iconUrl = $data->fields->priority->iconUrl;
-        $issue->fields->priority->name = $data->fields->priority->name;
-        $issue->fields->priority->id = $data->fields->priority->id;
+        /** @var array $issueArray */
+        $issueArray = json_decode($issueJson, true);
 
-        $issue->fields->type = new IssueType();
-        $issue->fields->type->self = $data->fields->issuetype->self;
-        $issue->fields->type->id = $data->fields->issuetype->id;
-        $issue->fields->type->description = $data->fields->issuetype->description;
-        $issue->fields->type->iconUrl = $data->fields->issuetype->iconUrl;
-        $issue->fields->type->name = $data->fields->issuetype->name;
-        $issue->fields->type->subTask = $data->fields->issuetype->subtask;
-        $issue->fields->type->hierarchyLevel = $data->fields->issuetype->hierarchyLevel;
+        $response = Http::withBasicAuth($this->username, $this->token)
+            ->post($this->hostname . self::ISSUE_ENDPOINT, $issueArray);
 
-        $issue->fields->project = new Project();
-        $issue->fields->project->id = $data->fields->project->id;
-        $issue->fields->project->key = $data->fields->project->key;
-        $issue->fields->project->name = $data->fields->project->name;
+        $response = json_decode($response->body());
 
-        $issue->fields->summary = $data->fields->summary;
-        $issue->fields->description = $data->fields->description;
+        return $this->getIssue($response->id);
 
-        return $issue;
+    }
+
+    public function getIssue(string $id): Issue
+    {
+        AuthHelper::validate($this);
+
+        $response = Http::withBasicAuth($this->username, $this->token)
+            ->get($this->hostname . self::ISSUE_ENDPOINT . '/' . $id);
+
+        $response = json_decode($response->body());
+        $response = $response[0];
+
+        return $this->mapIssues($response);
     }
 }
