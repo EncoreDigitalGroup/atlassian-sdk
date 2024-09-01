@@ -23,19 +23,23 @@ class JiraProject
 {
     use MapIssues;
 
-    public function __construct(
-        public ?string $hostname = null,
-        public ?string $username = null,
-        public ?string $token = null,
-    ) {
-        $this->hostname = $hostname ?? AtlassianHelper::getHostname();
-        $this->username = $username ?? AtlassianHelper::getUsername();
-        $this->token = $token ?? AtlassianHelper::getToken();
+    public const string ISSUE_SEARCH_ENDPOINT = '/rest/api/2/search';
+    public const string ISSUE_ENDPOINT = '/rest/api/2/issue';
+
+    public function __construct(public string $hostname, public string $username, public string $token)
+    {
+        $this->hostname = $hostname ?: AtlassianHelper::getHostname();
+        $this->username = $username ?: AtlassianHelper::getUsername();
+        $this->token = $token ?: AtlassianHelper::getToken();
     }
 
     public static function make(?string $hostname = null, ?string $username = null, ?string $token = null): JiraProject
     {
-        return new self($hostname, $username, $token);
+        return new self(
+            $hostname ?: AtlassianHelper::getHostname(),
+            $username ?: AtlassianHelper::getUsername(),
+            $token ?: AtlassianHelper::getToken()
+        );
     }
 
     public function getIssues(string $projectKey, int $startAt = 0, int $maxResults = 50): IssueSearchQueryResult
@@ -43,7 +47,7 @@ class JiraProject
         AuthHelper::validate($this);
 
         $response = Http::withBasicAuth($this->username, $this->token)
-            ->get($this->hostname . '/rest/api/2/search', [
+            ->get($this->hostname . self::ISSUE_SEARCH_ENDPOINT, [
                 'jql' => 'project=' . $projectKey,
                 'startAt' => $startAt,
                 'maxResults' => $maxResults,
@@ -59,20 +63,41 @@ class JiraProject
         $issueSearchQueryResult->issues = [];
 
         foreach ($response->issues as $issue) {
-            $issueSearchQueryResult->issues[] = self::mapIssues($issue);
+            $issueSearchQueryResult->issues[] = $this->mapIssues($issue);
         }
 
         return $issueSearchQueryResult;
     }
 
-    public function createIssue(Issue $issue)
+    public function createIssue(Issue $issue): Issue
+    {
+        AuthHelper::validate($this);
+
+        /** @var string $issueJson */
+        $issueJson = json_encode($issue);
+
+        /** @var array $issueArray */
+        $issueArray = json_decode($issueJson, true);
+
+        $response = Http::withBasicAuth($this->username, $this->token)
+            ->post($this->hostname . self::ISSUE_ENDPOINT, $issueArray);
+
+        $response = json_decode($response->body());
+
+        return $this->getIssue($response->id);
+
+    }
+
+    public function getIssue(string $id): Issue
     {
         AuthHelper::validate($this);
 
         $response = Http::withBasicAuth($this->username, $this->token)
-            ->post($this->hostname . '/rest/api/2/issue', $issue);
+            ->get($this->hostname . self::ISSUE_ENDPOINT . '/' . $id);
 
-        //TODO: Parse response and get the Jira Issue Object from API.
-        //TODO: Create getIssue() function to perform this operation.
+        $response = json_decode($response->body());
+        $response = $response[0];
+
+        return $this->mapIssues($response);
     }
 }
