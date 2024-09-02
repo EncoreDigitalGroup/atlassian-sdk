@@ -96,7 +96,6 @@ class JiraProject
             ->get($this->hostname . self::ISSUE_ENDPOINT . '/' . $id);
 
         $response = json_decode($response->body());
-        $response = $response[0];
 
         return $this->mapIssues($response);
     }

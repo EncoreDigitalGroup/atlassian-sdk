@@ -78,17 +78,13 @@ class TestCase extends OrchestraTestCase
                 "startAt" => 0,
                 "maxResults" => 50,
                 "total" => 2,
-                "issues" => [
-                    $fakeIssue,
-                ],
+                "issues" => [$fakeIssue],
             ]),
         ]);
 
         // Get Fake Issue
         Http::fake([
-            'https://example.atlassian.net/rest/api/2/issue/10001' => Http::response([
-                $fakeIssue,
-            ]),
+            'https://example.atlassian.net/rest/api/2/issue/10001' => Http::response($fakeIssue),
         ]);
 
         // Create Fake Issue
