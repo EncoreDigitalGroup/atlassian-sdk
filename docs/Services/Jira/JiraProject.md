@@ -8,6 +8,8 @@ The `JiraProject` class provides an interface to interact with JIRA projects, sp
 Below are the methods available in the `JiraProject` class:
 
 - `getIssues(string $projectKey, int $startAt = 0, int $maxResults = 50): IssueSearchQueryResult`
+- `createIssue(Issue $issue): Issue`
+- `getIssue(string $id): Issue`
 
 ## Method Details
 
@@ -36,6 +38,58 @@ $issues = JiraProject::getIssues($projectKey);
 foreach ($issues->issues as $issue) {
     echo $issue->key . PHP_EOL;
 }
+```
+
+### `createIssue`
+
+Create a new issue in JIRA.
+
+#### Parameters
+
+- `Issue $issue`: An instance of the `Issue` class representing the issue to be created.
+
+#### Return Value
+
+Returns an instance of `Issue` representing the created issue.
+
+#### Example Usage
+
+```php
+use EncoreDigitalGroup\Atlassian\Services\Jira\JiraProject;
+use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Issue;use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueFields;
+
+$jiraProject = JiraProject::make();
+$newIssue = new Issue();
+$newIssue->fields = new IssueFields();
+$newIssue->fields->summary = "Your Issue Summary";
+$newIssue->fields->description = "Your Issue Description";
+$createdIssue = $jiraProject->createIssue($newIssue);
+
+echo $createdIssue->key . PHP_EOL;
+```
+
+### `getIssue`
+
+Retrieve a specific issue from JIRA by its ID.
+
+#### Parameters
+
+- `string $id`: The ID of the issue to be retrieved.
+
+#### Return Value
+
+Returns an instance of `Issue` representing the retrieved issue.
+
+#### Example Usage
+
+```php
+use EncoreDigitalGroup\Atlassian\Services\Jira\JiraProject;
+
+$jiraProject = JiraProject::make();
+$issueId = "YOUR_ISSUE_ID";
+$issue = $jiraProject->getIssue($issueId);
+
+echo $issue->key . PHP_EOL;
 ```
 
 ## Handling Responses
