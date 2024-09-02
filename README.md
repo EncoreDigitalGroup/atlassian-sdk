@@ -2,9 +2,15 @@
 
 This Atlassian SDK developed by [Encore Digital Group](https://github.com/EncoreDigitalGroup) provides a strongly typed method of interacting with Atlassian Products.
 
+# Who Uses This SDK
+
+Aside from Encore Digital Group, some notable users of this SDK are:
+
+<a href="https://thunk.dev" target="_blank"><img src="./img/thunk.png" width="250"></a>
+
 # We Love Laravel
 
-For now, this SDK is built for use with Laravel only. However, we are working on a way to make it available for use with other PHP frameworks by using
+The Atlassian SDK was originally built for use with Laravel only, but now it can be used in any framework, or no framework thanks to
 [PHPGenesis](https://github.com/EncoreDigitalGroup/PHPGenesis).
 
 # What's Included
