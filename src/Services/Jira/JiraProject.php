@@ -12,7 +12,8 @@ use EncoreDigitalGroup\Atlassian\Helpers\AuthHelper;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Issue;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueSearchQueryResult;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Traits\MapIssues;
-use Illuminate\Support\Facades\Http;
+use PHPGenesis\Http\HttpClient;
+use PHPGenesis\Http\HttpClientBuilder;
 
 /**
  * @experimental
@@ -31,6 +32,8 @@ class JiraProject
         $this->hostname = $hostname ?: AtlassianHelper::getHostname();
         $this->username = $username ?: AtlassianHelper::getUsername();
         $this->token = $token ?: AtlassianHelper::getToken();
+
+        new HttpClientBuilder();
     }
 
     public static function make(?string $hostname = null, ?string $username = null, ?string $token = null): JiraProject
@@ -46,7 +49,7 @@ class JiraProject
     {
         AuthHelper::validate($this);
 
-        $response = Http::withBasicAuth($this->username, $this->token)
+        $response = HttpClient::withBasicAuth($this->username, $this->token)
             ->get($this->hostname . self::ISSUE_SEARCH_ENDPOINT, [
                 'jql' => 'project=' . $projectKey,
                 'startAt' => $startAt,
@@ -79,7 +82,7 @@ class JiraProject
         /** @var array $issueArray */
         $issueArray = json_decode($issueJson, true);
 
-        $response = Http::withBasicAuth($this->username, $this->token)
+        $response = HttpClient::withBasicAuth($this->username, $this->token)
             ->post($this->hostname . self::ISSUE_ENDPOINT, $issueArray);
 
         $response = json_decode($response->body());
@@ -92,7 +95,7 @@ class JiraProject
     {
         AuthHelper::validate($this);
 
-        $response = Http::withBasicAuth($this->username, $this->token)
+        $response = HttpClient::withBasicAuth($this->username, $this->token)
             ->get($this->hostname . self::ISSUE_ENDPOINT . '/' . $id);
 
         $response = json_decode($response->body());

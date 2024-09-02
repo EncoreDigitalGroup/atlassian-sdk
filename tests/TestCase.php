@@ -4,8 +4,10 @@ namespace EncoreDigitalGroup\Atlassian\Tests;
 
 use EncoreDigitalGroup\Atlassian\Providers\AtlassianServiceProvider;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Client\Factory as HttpFactory;
+use Illuminate\Support\Facades\Facade;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
+use PHPGenesis\Http\HttpClient;
 
 class TestCase extends OrchestraTestCase
 {
@@ -24,6 +26,13 @@ class TestCase extends OrchestraTestCase
 
     protected function getEnvironmentSetUp($app): void
     {
+
+        $app->singleton('http', function () {
+            return new HttpFactory();
+        });
+
+        Facade::setFacadeApplication($app);
+
         // Set up environment variables or configuration specific to your package
         $app['config']->set('atlassian.hostname', 'https://example.atlassian.net');
         $app['config']->set('atlassian.username', 'expectedUsername');
@@ -72,8 +81,8 @@ class TestCase extends OrchestraTestCase
         ];
 
         // Search Fake Issues
-        Http::fake([
-            'https://example.atlassian.net/rest/api/2/search*' => Http::response([
+        HttpClient::fake([
+            'https://example.atlassian.net/rest/api/2/search*' => HttpClient::response([
                 "expand" => "schema,names",
                 "startAt" => 0,
                 "maxResults" => 50,
@@ -83,13 +92,13 @@ class TestCase extends OrchestraTestCase
         ]);
 
         // Get Fake Issue
-        Http::fake([
-            'https://example.atlassian.net/rest/api/2/issue/10001' => Http::response($fakeIssue),
+        HttpClient::fake([
+            'https://example.atlassian.net/rest/api/2/issue/10001' => HttpClient::response($fakeIssue),
         ]);
 
         // Create Fake Issue
-        Http::fake([
-            'https://example.atlassian.net/rest/api/2/issue' => Http::response([
+        HttpClient::fake([
+            'https://example.atlassian.net/rest/api/2/issue' => HttpClient::response([
                 'id' => '10001',
                 'key' => 'TEST-1',
                 'self' => 'https://example.atlassian.net/rest/api/issue/10001',
