@@ -33,7 +33,7 @@ class JiraProject
         $this->username = $username ?: AtlassianHelper::getUsername();
         $this->token = $token ?: AtlassianHelper::getToken();
 
-        new HttpClientBuilder();
+        $builder = new HttpClientBuilder();
     }
 
     public static function make(?string $hostname = null, ?string $username = null, ?string $token = null): JiraProject
