@@ -4,7 +4,6 @@ use EncoreDigitalGroup\Atlassian\Services\Jira\JiraProject;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Issue;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueFields;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueSearchQueryResult;
-use Illuminate\Support\Facades\Http;
 
 test('make returns instance of JiraProject', function () {
     $jiraProject = JiraProject::make();
