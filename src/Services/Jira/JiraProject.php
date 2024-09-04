@@ -11,6 +11,7 @@ use EncoreDigitalGroup\Atlassian\AtlassianHelper;
 use EncoreDigitalGroup\Atlassian\Helpers\AuthHelper;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Issue;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueSearchQueryResult;
+use EncoreDigitalGroup\Atlassian\Services\Jira\Traits\HandleJql;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Traits\MapIssues;
 use PHPGenesis\Http\HttpClient;
 use PHPGenesis\Http\HttpClientBuilder;
@@ -22,9 +23,9 @@ use PHPGenesis\Http\HttpClientBuilder;
  */
 class JiraProject
 {
+    use HandleJql;
     use MapIssues;
 
-    public const string ISSUE_SEARCH_ENDPOINT = '/rest/api/2/search';
     public const string ISSUE_ENDPOINT = '/rest/api/2/issue';
 
     public function __construct(public string $hostname, public string $username, public string $token)
@@ -47,29 +48,7 @@ class JiraProject
 
     public function getIssues(string $projectKey, int $startAt = 0, int $maxResults = 50): IssueSearchQueryResult
     {
-        AuthHelper::validate($this);
-
-        $response = HttpClient::withBasicAuth($this->username, $this->token)
-            ->get($this->hostname . self::ISSUE_SEARCH_ENDPOINT, [
-                'jql' => 'project=' . $projectKey,
-                'startAt' => $startAt,
-                'maxResults' => $maxResults,
-            ]);
-
-        $response = json_decode($response->body());
-
-        $issueSearchQueryResult = new IssueSearchQueryResult();
-        $issueSearchQueryResult->expand = $response->expand;
-        $issueSearchQueryResult->startAt = $response->startAt;
-        $issueSearchQueryResult->maxResults = $response->maxResults;
-        $issueSearchQueryResult->total = $response->total;
-        $issueSearchQueryResult->issues = [];
-
-        foreach ($response->issues as $issue) {
-            $issueSearchQueryResult->issues[] = $this->mapIssues($issue);
-        }
-
-        return $issueSearchQueryResult;
+        return $this->jql("project={$projectKey}", $startAt, $maxResults);
     }
 
     public function createIssue(Issue $issue): Issue
