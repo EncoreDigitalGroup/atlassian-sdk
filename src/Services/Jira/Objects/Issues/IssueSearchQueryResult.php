@@ -13,6 +13,4 @@ use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\JQL\JqlResult;
  * @deprecated use EncoreDigitalGroup\Atlassian\Services\Jira\Object\JQL\JqlResult instead.
  * This class will be removed in v0.3.0
  */
-class IssueSearchQueryResult extends JqlResult
-{
-}
+class IssueSearchQueryResult extends JqlResult {}
