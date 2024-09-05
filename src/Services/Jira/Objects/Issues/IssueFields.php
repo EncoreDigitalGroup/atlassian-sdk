@@ -17,4 +17,12 @@ class IssueFields
     public IssuePriority $priority;
     public IssueType $type;
     public Project $project;
+
+    public function __construct()
+    {
+        $this->status = new IssueStatus();
+        $this->priority = new IssuePriority();
+        $this->type = new IssueType();
+        $this->project = new Project();
+    }
 }

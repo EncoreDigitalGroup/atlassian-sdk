@@ -7,13 +7,12 @@
 
 namespace EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues;
 
-class IssueSearchQueryResult
-{
-    public ?string $expand;
-    public int $startAt = 0;
-    public int $maxResults = 50;
-    public int $total;
+use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\JQL\JqlResult;
 
-    /** @var array<Issue> */
-    public array $issues;
+/**
+ * @deprecated use EncoreDigitalGroup\Atlassian\Services\Jira\Object\JQL\JqlResult instead.
+ * This class will be removed in v0.3.0
+ */
+class IssueSearchQueryResult extends JqlResult
+{
 }
