@@ -3,7 +3,7 @@
 use EncoreDigitalGroup\Atlassian\Services\Jira\JiraProject;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Issue;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueFields;
-use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueSearchQueryResult;
+use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\JQL\JqlResult;
 
 test('make returns instance of JiraProject', function () {
     $jiraProject = JiraProject::make();
@@ -11,12 +11,12 @@ test('make returns instance of JiraProject', function () {
     expect($jiraProject)->toBeInstanceOf(JiraProject::class);
 });
 
-test('getIssues returns the correct instance of IssueSearchQueryResult with valid data', function () {
+test('getIssues returns the correct instance of JqlResult with valid data', function () {
     // Call the method under test
     $result = JiraProject::make()->getIssues('TEST');
 
     // Assertions
-    expect($result)->toBeInstanceOf(IssueSearchQueryResult::class)
+    expect($result)->toBeInstanceOf(JqlResult::class)
         ->and($result->total)->toEqual(2)
         ->and($result->issues)->toBeArray()
         ->and($result->issues)->toHaveCount(1)

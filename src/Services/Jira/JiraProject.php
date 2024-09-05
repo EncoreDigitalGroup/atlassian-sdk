@@ -10,9 +10,9 @@ namespace EncoreDigitalGroup\Atlassian\Services\Jira;
 use EncoreDigitalGroup\Atlassian\AtlassianHelper;
 use EncoreDigitalGroup\Atlassian\Helpers\AuthHelper;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Issue;
-use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueSearchQueryResult;
-use EncoreDigitalGroup\Atlassian\Services\Jira\Traits\HandleJql;
-use EncoreDigitalGroup\Atlassian\Services\Jira\Traits\MapIssues;
+use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Traits\MapIssues;
+use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\JQL\JqlResult;
+use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\JQL\Traits\HandleJql;
 use PHPGenesis\Http\HttpClient;
 use PHPGenesis\Http\HttpClientBuilder;
 
@@ -46,7 +46,7 @@ class JiraProject
         );
     }
 
-    public function getIssues(string $projectKey, int $startAt = 0, int $maxResults = 50): IssueSearchQueryResult
+    public function getIssues(string $projectKey, int $startAt = 0, int $maxResults = 50): JqlResult
     {
         return $this->jql("project={$projectKey}", $startAt, $maxResults);
     }

@@ -5,7 +5,7 @@
  * All Right Reserved.
  */
 
-namespace EncoreDigitalGroup\Atlassian\Services\Jira\Traits;
+namespace EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Traits;
 
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Issue;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueFields;

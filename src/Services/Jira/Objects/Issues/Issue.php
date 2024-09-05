@@ -14,4 +14,9 @@ class Issue
     public string $self;
     public string $key;
     public IssueFields $fields;
+
+    public function __construct()
+    {
+        $this->fields = new IssueFields();
+    }
 }
