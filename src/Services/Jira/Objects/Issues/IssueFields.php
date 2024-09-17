@@ -11,7 +11,7 @@ use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Projects\Project;
 
 class IssueFields
 {
-    public string $summary;
+    public ?string $summary;
     public ?string $description;
     public IssueStatus $status;
     public IssuePriority $priority;
