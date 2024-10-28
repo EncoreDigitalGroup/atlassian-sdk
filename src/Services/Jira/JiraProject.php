@@ -20,8 +20,8 @@ use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\JQL\Traits\HandleJql;
  */
 class JiraProject
 {
-    use InteractsWithAtlassian;
     use HandleJql;
+    use InteractsWithAtlassian;
     use MapIssues;
 
     public const string ISSUE_ENDPOINT = '/rest/api/2/issue';

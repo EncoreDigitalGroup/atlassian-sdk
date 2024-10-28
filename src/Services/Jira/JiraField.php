@@ -24,7 +24,7 @@ class JiraField
 
         $fieldCollection = new FieldCollection();
 
-        foreach($fields as $field) {
+        foreach ($fields as $field) {
             $mappedField = $this->mapFields($field);
             $fieldCollection->push($mappedField);
         }

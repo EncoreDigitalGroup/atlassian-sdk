@@ -9,6 +9,4 @@ namespace EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Fields;
 
 use Illuminate\Support\Collection;
 
-class FieldCollection extends Collection
-{
-}
+class FieldCollection extends Collection {}
