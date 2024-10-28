@@ -7,24 +7,22 @@
 
 namespace EncoreDigitalGroup\Atlassian\Services\Jira\Objects\JQL\Traits;
 
-use EncoreDigitalGroup\Atlassian\Helpers\AuthHelper;
+use EncoreDigitalGroup\Atlassian\Services\Jira\Common\InteractsWithAtlassian;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\JQL\JqlResult;
-use PHPGenesis\Http\HttpClient;
 
 trait HandleJql
 {
+    use InteractsWithAtlassian;
+
     public const string ISSUE_SEARCH_ENDPOINT = '/rest/api/2/search';
 
     public function jql(string $query, int $startAt = 0, int $maxResults = 50): JqlResult
     {
-        AuthHelper::validate($this);
-
-        $response = HttpClient::withBasicAuth($this->username, $this->token)
-            ->get($this->hostname . self::ISSUE_SEARCH_ENDPOINT, [
-                'jql' => $query,
-                'startAt' => $startAt,
-                'maxResults' => $maxResults,
-            ]);
+        $response = $this->client()->get($this->hostname . self::ISSUE_SEARCH_ENDPOINT, [
+            'jql' => $query,
+            'startAt' => $startAt,
+            'maxResults' => $maxResults,
+        ]);
 
         $response = json_decode($response->body());
 
