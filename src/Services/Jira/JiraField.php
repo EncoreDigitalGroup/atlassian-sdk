@@ -8,8 +8,9 @@
 namespace EncoreDigitalGroup\Atlassian\Services\Jira;
 
 use EncoreDigitalGroup\Atlassian\Services\Jira\Common\InteractsWithAtlassian;
-use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Fields\FieldCollection;
+use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Fields\Field;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Fields\Traits\MapFields;
+use Illuminate\Support\Collection;
 
 class JiraField
 {
@@ -18,13 +19,14 @@ class JiraField
 
     protected const string FIELD_ENDPOINT = '/rest/api/2/field';
 
-    public function getAllFields(): FieldCollection
+    /** @returns Collection<Field> */
+    public function getAllFields(): Collection
     {
         $fields = $this->client()->get($this->hostname . self::FIELD_ENDPOINT);
 
-        $fieldCollection = new FieldCollection();
+        $fieldCollection = new Collection();
 
-        foreach ($fields as $field) {
+        foreach($fields as $field) {
             $mappedField = $this->mapFields($field);
             $fieldCollection->push($mappedField);
         }
