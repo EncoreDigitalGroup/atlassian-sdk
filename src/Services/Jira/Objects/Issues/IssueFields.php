@@ -8,6 +8,7 @@
 namespace EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues;
 
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Projects\Project;
+use Illuminate\Support\Collection;
 
 class IssueFields
 {
@@ -18,11 +19,15 @@ class IssueFields
     public IssueType $type;
     public Project $project;
 
+    /** @var Collection<IssueCustomField> */
+    public Collection $customFields;
+
     public function __construct()
     {
         $this->status = new IssueStatus();
         $this->priority = new IssuePriority();
         $this->type = new IssueType();
         $this->project = new Project();
+        $this->customFields = new Collection();
     }
 }

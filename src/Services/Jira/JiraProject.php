@@ -12,6 +12,7 @@ use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Issue;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Traits\MapIssues;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\JQL\JqlResult;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\JQL\Traits\HandleJql;
+use Illuminate\Support\Collection;
 
 /**
  * @experimental
@@ -39,12 +40,19 @@ class JiraProject
         /** @var array $issueArray */
         $issueArray = json_decode($issueJson, true);
 
+        $customFields = new Collection($issueArray['fields']['customFields']);
+
+        unset($issueArray['fields']['customFields']);
+
+        $customFields->each(function ($customField) use (&$issueArray) {
+            $issueArray['fields'][$customField['name']] = $customField['value'];
+        });
+
         $response = $this->client()->post($this->hostname . self::ISSUE_ENDPOINT, $issueArray);
 
         $response = json_decode($response->body());
 
         return $this->getIssue($response->id);
-
     }
 
     public function getIssue(string $id): Issue
