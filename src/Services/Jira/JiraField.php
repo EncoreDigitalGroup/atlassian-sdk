@@ -17,12 +17,14 @@ class JiraField
     use InteractsWithAtlassian;
     use MapFields;
 
-    protected const string FIELD_ENDPOINT = '/rest/api/2/field';
+    public const string FIELD_ENDPOINT = '/rest/api/2/field';
 
     /** @returns Collection<Field> */
     public function getAllFields(): Collection
     {
         $fields = $this->client()->get($this->hostname . self::FIELD_ENDPOINT);
+
+        $fields = json_decode($fields->body());
 
         $fieldCollection = new Collection();
 
