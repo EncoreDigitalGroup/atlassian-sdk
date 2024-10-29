@@ -19,7 +19,7 @@ class IssueFields
     public IssueType $type;
     public Project $project;
 
-    /** @var Collection<IssueCustomField> $customFields */
+    /** @var Collection<IssueCustomField> */
     public Collection $customFields;
 
     public function __construct()

@@ -9,7 +9,6 @@ namespace EncoreDigitalGroup\Atlassian\Services\Jira;
 
 use EncoreDigitalGroup\Atlassian\Services\Jira\Common\InteractsWithAtlassian;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Issue;
-use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\IssueCustomField;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Traits\MapIssues;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\JQL\JqlResult;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\JQL\Traits\HandleJql;
@@ -45,7 +44,7 @@ class JiraProject
 
         unset($issueArray['fields']['customFields']);
 
-        $customFields->each(function($customField) use (&$issueArray) {
+        $customFields->each(function ($customField) use (&$issueArray) {
             $issueArray['fields'][$customField['name']] = $customField['value'];
         });
 
