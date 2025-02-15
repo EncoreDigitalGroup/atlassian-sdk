@@ -5,7 +5,6 @@ namespace EncoreDigitalGroup\Atlassian\Tests;
 use EncoreDigitalGroup\Atlassian\Providers\AtlassianServiceProvider;
 use EncoreDigitalGroup\Atlassian\Services\Jira\JiraField;
 use EncoreDigitalGroup\Atlassian\Services\Jira\JiraProject;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\Client\Factory as HttpFactory;
 use Illuminate\Support\Facades\Facade;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
