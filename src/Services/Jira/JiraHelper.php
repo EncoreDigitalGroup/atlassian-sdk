@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2024. Encore Digital Group.
+ * Copyright (c) 2024-2025. Encore Digital Group.
  * All Right Reserved.
  */
 
@@ -13,8 +13,9 @@ class JiraHelper
     public static function getKeyFromSmartLink(string $smartLink): ?string
     {
         $pattern = '/https:\/\/[a-zA-Z0-9.-]+\/browse\/([A-Z]+-\d+)|/';
+        $match = preg_match($pattern, $smartLink, $matches);
 
-        if (preg_match($pattern, $smartLink, $matches)) {
+        if ($match && isset($matches[1])) {
             return $matches[1];
         }
 
