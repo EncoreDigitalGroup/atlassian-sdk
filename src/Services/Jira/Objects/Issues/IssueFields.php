@@ -24,10 +24,10 @@ class IssueFields
 
     public function __construct()
     {
-        $this->status = new IssueStatus();
-        $this->priority = new IssuePriority();
-        $this->type = new IssueType();
-        $this->project = new Project();
-        $this->customFields = new Collection();
+        $this->status = new IssueStatus;
+        $this->priority = new IssuePriority;
+        $this->type = new IssueType;
+        $this->project = new Project;
+        $this->customFields = new Collection;
     }
 }

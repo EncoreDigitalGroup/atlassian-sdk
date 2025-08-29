@@ -17,6 +17,6 @@ class Issue
 
     public function __construct()
     {
-        $this->fields = new IssueFields();
+        $this->fields = new IssueFields;
     }
 }

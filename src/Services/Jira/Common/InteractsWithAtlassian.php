@@ -21,7 +21,7 @@ trait InteractsWithAtlassian
         $this->username = $username !== '' && $username !== '0' ? $username : AtlassianHelper::getUsername();
         $this->token = $token !== '' && $token !== '0' ? $token : AtlassianHelper::getToken();
 
-        new HttpClientBuilder();
+        new HttpClientBuilder;
     }
 
     public static function make(?string $hostname = null, ?string $username = null, ?string $token = null): static

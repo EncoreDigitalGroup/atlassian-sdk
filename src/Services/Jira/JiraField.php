@@ -26,7 +26,7 @@ class JiraField
 
         $fields = json_decode($fields->body());
 
-        $fieldCollection = new Collection();
+        $fieldCollection = new Collection;
 
         foreach ($fields as $field) {
             $mappedField = $this->mapFields($field);

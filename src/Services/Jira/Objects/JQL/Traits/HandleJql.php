@@ -26,7 +26,7 @@ trait HandleJql
 
         $response = json_decode($response->body());
 
-        $jqlResult = new JqlResult();
+        $jqlResult = new JqlResult;
         $jqlResult->expand = $response->expand;
         $jqlResult->startAt = $response->startAt;
         $jqlResult->maxResults = $response->maxResults;
