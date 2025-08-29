@@ -44,7 +44,7 @@ class JiraProject
 
         unset($issueArray['fields']['customFields']);
 
-        $customFields->each(function ($customField) use (&$issueArray) {
+        $customFields->each(function (array $customField) use (&$issueArray): void {
             $issueArray['fields'][$customField['name']] = $customField['value'];
         });
 

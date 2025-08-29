@@ -13,7 +13,7 @@ trait MapFields
 {
     private function mapFields(mixed $data): Field
     {
-        $field = new Field();
+        $field = new Field;
         $field->id = $data->id;
         $field->key = $data->key;
         $field->name = $data->name;

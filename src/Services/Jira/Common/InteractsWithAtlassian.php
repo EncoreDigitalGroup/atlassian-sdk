@@ -17,19 +17,19 @@ trait InteractsWithAtlassian
 {
     public function __construct(public string $hostname, public string $username, public string $token)
     {
-        $this->hostname = $hostname ?: AtlassianHelper::getHostname();
-        $this->username = $username ?: AtlassianHelper::getUsername();
-        $this->token = $token ?: AtlassianHelper::getToken();
+        $this->hostname = $hostname !== '' && $hostname !== '0' ? $hostname : AtlassianHelper::getHostname();
+        $this->username = $username !== '' && $username !== '0' ? $username : AtlassianHelper::getUsername();
+        $this->token = $token !== '' && $token !== '0' ? $token : AtlassianHelper::getToken();
 
-        $builder = new HttpClientBuilder();
+        new HttpClientBuilder;
     }
 
     public static function make(?string $hostname = null, ?string $username = null, ?string $token = null): static
     {
         return new static(
-            $hostname ?: AtlassianHelper::getHostname(),
-            $username ?: AtlassianHelper::getUsername(),
-            $token ?: AtlassianHelper::getToken()
+            $hostname !== null && $hostname !== '' && $hostname !== '0' ? $hostname : AtlassianHelper::getHostname(),
+            $username !== null && $username !== '' && $username !== '0' ? $username : AtlassianHelper::getUsername(),
+            $token !== null && $token !== '' && $token !== '0' ? $token : AtlassianHelper::getToken()
         );
     }
 
