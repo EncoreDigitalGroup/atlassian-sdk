@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2024. Encore Digital Group.
+ * Copyright (c) 2024-2025. Encore Digital Group.
  * All Right Reserved.
  */
 
@@ -12,7 +12,7 @@ use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues\Issue;
 class JqlResult
 {
     public ?string $expand;
-    public int $startAt = 0;
+    public ?string $nextPageToken = null;
     public int $maxResults = 50;
     public int $total;
 

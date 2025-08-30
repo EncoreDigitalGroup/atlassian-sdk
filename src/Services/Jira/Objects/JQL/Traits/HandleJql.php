@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2024. Encore Digital Group.
+ * Copyright (c) 2024-2025. Encore Digital Group.
  * All Right Reserved.
  */
 
@@ -16,19 +16,25 @@ trait HandleJql
 
     public const string ISSUE_SEARCH_ENDPOINT = '/rest/api/2/search';
 
-    public function jql(string $query, int $startAt = 0, int $maxResults = 50): JqlResult
+    public function jql(string $query, ?string $nextPageToken = null, int $maxResults = 50): JqlResult
     {
-        $response = $this->client()->get($this->hostname . self::ISSUE_SEARCH_ENDPOINT, [
-            'jql' => $query,
-            'startAt' => $startAt,
-            'maxResults' => $maxResults,
-        ]);
+        $queryParams = [
+            "jql" => $query,
+            "maxResults" => $maxResults,
+            "fields" => "*all",
+        ];
+
+        if (!is_null($nextPageToken)) {
+            $queryParams["nextPageToken"] = $nextPageToken;
+        }
+
+        $response = $this->client()->get($this->hostname . self::ISSUE_SEARCH_ENDPOINT, $queryParams);
 
         $response = json_decode($response->body());
 
         $jqlResult = new JqlResult;
         $jqlResult->expand = $response->expand;
-        $jqlResult->startAt = $response->startAt;
+        $jqlResult->nextPageToken = $response->nextPageToken;
         $jqlResult->maxResults = $response->maxResults;
         $jqlResult->total = $response->total;
         $jqlResult->issues = [];

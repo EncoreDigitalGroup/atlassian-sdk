@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2024. Encore Digital Group.
+ * Copyright (c) 2024-2025. Encore Digital Group.
  * All Right Reserved.
  */
 
@@ -27,9 +27,9 @@ class JiraProject
 
     public const string ISSUE_ENDPOINT = '/rest/api/2/issue';
 
-    public function getIssues(string $projectKey, int $startAt = 0, int $maxResults = 50): JqlResult
+    public function getIssues(string $projectKey, ?string $nextPageToken = null, int $maxResults = 50): JqlResult
     {
-        return $this->jql("project={$projectKey}", $startAt, $maxResults);
+        return $this->jql("project={$projectKey}", $nextPageToken, $maxResults);
     }
 
     public function createIssue(Issue $issue): Issue
