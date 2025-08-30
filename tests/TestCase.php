@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * Copyright (c) 2025. Encore Digital Group.
+ * All Right Reserved.
+ */
+
 namespace EncoreDigitalGroup\Atlassian\Tests;
 
 use EncoreDigitalGroup\Atlassian\Providers\AtlassianServiceProvider;
@@ -47,7 +52,7 @@ class TestCase extends OrchestraTestCase
         HttpClient::fake([
             self::HOSTNAME . JiraProject::ISSUE_SEARCH_ENDPOINT . '*' => HttpClient::response([
                 "expand" => "schema,names",
-                "startAt" => 0,
+                "nextPageToken" => null,
                 "maxResults" => 50,
                 "total" => 2,
                 "issues" => [$this->getFakeIssue()],
