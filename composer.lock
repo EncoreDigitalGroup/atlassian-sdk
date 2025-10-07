@@ -1133,16 +1133,16 @@
         },
         {
             "name": "encoredigitalgroup/stdlib",
-            "version": "v2.14.2",
+            "version": "v2.14.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EncoreDigitalGroup/stdlib.git",
-                "reference": "e127859927dca6aaa8c0216573be272b1b4a02fd"
+                "reference": "5f7382809a1897341fd5957f5d2b735026e141a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EncoreDigitalGroup/stdlib/zipball/e127859927dca6aaa8c0216573be272b1b4a02fd",
-                "reference": "e127859927dca6aaa8c0216573be272b1b4a02fd",
+                "url": "https://api.github.com/repos/EncoreDigitalGroup/stdlib/zipball/5f7382809a1897341fd5957f5d2b735026e141a6",
+                "reference": "5f7382809a1897341fd5957f5d2b735026e141a6",
                 "shasum": ""
             },
             "require": {
@@ -1185,9 +1185,9 @@
             "description": "A collection of standard library classes and functions for PHP.",
             "support": {
                 "issues": "https://github.com/EncoreDigitalGroup/stdlib/issues",
-                "source": "https://github.com/EncoreDigitalGroup/stdlib/tree/v2.14.2"
+                "source": "https://github.com/EncoreDigitalGroup/stdlib/tree/v2.14.3"
             },
-            "time": "2025-09-28T20:45:26+00:00"
+            "time": "2025-10-01T15:13:57+00:00"
         },
         {
             "name": "fruitcake/php-cors",
