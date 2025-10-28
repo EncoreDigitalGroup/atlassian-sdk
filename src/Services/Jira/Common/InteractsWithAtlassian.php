@@ -27,9 +27,9 @@ trait InteractsWithAtlassian
     public static function make(?string $hostname = null, ?string $username = null, ?string $token = null): static
     {
         return new static(
-            $hostname !== null && $hostname !== '' && $hostname !== '0' ? $hostname : AtlassianHelper::getHostname(),
-            $username !== null && $username !== '' && $username !== '0' ? $username : AtlassianHelper::getUsername(),
-            $token !== null && $token !== '' && $token !== '0' ? $token : AtlassianHelper::getToken()
+            in_array($hostname, [null, '', '0'], true) ? AtlassianHelper::getHostname() : $hostname,
+            in_array($username, [null, '', '0'], true) ? AtlassianHelper::getUsername() : $username,
+            in_array($token, [null, '', '0'], true) ? AtlassianHelper::getToken() : $token
         );
     }
 
