@@ -3217,7 +3217,7 @@
         },
         {
             "name": "phpgenesis/common",
-            "version": "v1.6.0",
+            "version": "v1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPGenesis/Common.git",
@@ -3256,13 +3256,13 @@
             ],
             "description": "Shared Functionality for PHPGenesis",
             "support": {
-                "source": "https://github.com/PHPGenesis/Common/tree/v1.6.0"
+                "source": "https://github.com/PHPGenesis/Common/tree/v1.6.1"
             },
             "time": "2025-10-26T16:19:08+00:00"
         },
         {
             "name": "phpgenesis/http",
-            "version": "v1.6.0",
+            "version": "v1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPGenesis/Http.git",
@@ -3293,7 +3293,7 @@
             ],
             "description": "PHPGenesis Implementation of Laravel's HTTP Client",
             "support": {
-                "source": "https://github.com/PHPGenesis/Http/tree/v1.6.0"
+                "source": "https://github.com/PHPGenesis/Http/tree/v1.6.1"
             },
             "time": "2025-08-10T00:50:24+00:00"
         },
