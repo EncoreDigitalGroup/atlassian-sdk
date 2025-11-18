@@ -1,3 +1,8 @@
+---
+title: Atlassian SDK
+sidebar_position: 1
+---
+
 # EncoreDigitalGroup/Atlassian-Sdk
 
 This Atlassian SDK developed by [Encore Digital Group](https://github.com/EncoreDigitalGroup) provides a strongly typed method of interacting with Atlassian Products.
@@ -6,7 +11,7 @@ This Atlassian SDK developed by [Encore Digital Group](https://github.com/Encore
 
 Aside from Encore Digital Group, some notable users of this SDK are:
 
-<a href="https://thunk.dev" target="_blank"><img src="./img/thunk.png" width="250"></a>
+<a href="https://thunk.dev" target="_blank"><img src="./img/thunk.png" width="250"></img></a>
 
 # We Love Laravel
 
