@@ -13,10 +13,15 @@ use Illuminate\Support\Collection;
 class IssueFields
 {
     public ?string $summary;
+
     public ?string $description;
+
     public IssueStatus $status;
+
     public IssuePriority $priority;
+
     public IssueType $type;
+
     public Project $project;
 
     /** @var Collection<IssueCustomField> */
