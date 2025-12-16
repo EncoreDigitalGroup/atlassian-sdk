@@ -3228,16 +3228,16 @@
         },
         {
             "name": "phpgenesis/common",
-            "version": "v1.6.1",
+            "version": "v1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPGenesis/Common.git",
-                "reference": "32bffc876f383796d7685090694b67e7b24b43e8"
+                "reference": "617ed26be587c6c4013ec46f0fb7b494b3eed22e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPGenesis/Common/zipball/32bffc876f383796d7685090694b67e7b24b43e8",
-                "reference": "32bffc876f383796d7685090694b67e7b24b43e8",
+                "url": "https://api.github.com/repos/PHPGenesis/Common/zipball/617ed26be587c6c4013ec46f0fb7b494b3eed22e",
+                "reference": "617ed26be587c6c4013ec46f0fb7b494b3eed22e",
                 "shasum": ""
             },
             "require": {
@@ -3247,7 +3247,7 @@
                 "illuminate/collections": "^10|^11|^12",
                 "illuminate/database": "^10|^11|^12",
                 "illuminate/support": "^10|^11|^12",
-                "php": "^8.3"
+                "php": "^8.3|^8.4|^8.5"
             },
             "require-dev": {
                 "laravel/framework": "^10|^11|^12"
@@ -3267,29 +3267,29 @@
             ],
             "description": "Shared Functionality for PHPGenesis",
             "support": {
-                "source": "https://github.com/PHPGenesis/Common/tree/v1.6.1"
+                "source": "https://github.com/PHPGenesis/Common/tree/v1.9.1"
             },
-            "time": "2025-10-26T16:19:08+00:00"
+            "time": "2025-12-11T03:43:53+00:00"
         },
         {
             "name": "phpgenesis/http",
-            "version": "v1.6.1",
+            "version": "v1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPGenesis/Http.git",
-                "reference": "f703e7d89cf437ca335705e41d4bf6cc9250beba"
+                "reference": "397d97fc806de970a92edadbacc60c32a1abcd67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPGenesis/Http/zipball/f703e7d89cf437ca335705e41d4bf6cc9250beba",
-                "reference": "f703e7d89cf437ca335705e41d4bf6cc9250beba",
+                "url": "https://api.github.com/repos/PHPGenesis/Http/zipball/397d97fc806de970a92edadbacc60c32a1abcd67",
+                "reference": "397d97fc806de970a92edadbacc60c32a1abcd67",
                 "shasum": ""
             },
             "require": {
                 "illuminate/container": "^10|^11|^12",
                 "illuminate/http": "^10|^11|^12",
                 "illuminate/support": "^10|^11|^12",
-                "php": "^8.3",
+                "php": "^8.3|^8.4|^8.5",
                 "phpgenesis/common": "self.version"
             },
             "type": "library",
@@ -3304,9 +3304,9 @@
             ],
             "description": "PHPGenesis Implementation of Laravel's HTTP Client",
             "support": {
-                "source": "https://github.com/PHPGenesis/Http/tree/v1.6.1"
+                "source": "https://github.com/PHPGenesis/Http/tree/v1.9.1"
             },
-            "time": "2025-08-10T00:50:24+00:00"
+            "time": "2025-12-11T03:43:50+00:00"
         },
         {
             "name": "phpoption/phpoption",
