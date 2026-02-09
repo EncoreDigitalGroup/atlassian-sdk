@@ -1,5 +1,5 @@
 <component name="CopyrightManager">
-  <settings default="Encore Digital Group">
+  <settings>
     <LanguageOptions name="CSS" />
     <LanguageOptions name="DTD">
       <option name="prefixLines" value="false" />
