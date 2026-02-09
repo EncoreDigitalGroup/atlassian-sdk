@@ -1,10 +1,5 @@
 <?php
 
-/*
- * Copyright (c) 2024-2025. Encore Digital Group.
- * All Right Reserved.
- */
-
 namespace EncoreDigitalGroup\Atlassian\Services\Jira\Objects\JQL\Traits;
 
 use EncoreDigitalGroup\Atlassian\Services\Jira\Common\InteractsWithAtlassian;

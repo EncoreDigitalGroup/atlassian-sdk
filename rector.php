@@ -1,12 +1,5 @@
 <?php
 
-/*
- * Copyright (c) 2024. Encore Digital Group.
- * All Right Reserved.
- */
-
-declare(strict_types=1);
-
 use Rector\CodeQuality\Rector\Equal\UseIdenticalOverEqualWithSameTypeRector;
 use Rector\CodeQuality\Rector\FuncCall\CompactToVariablesRector;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;

@@ -1,10 +1,5 @@
 <?php
 
-/*
- * Copyright (c) 2024. Encore Digital Group.
- * All Right Reserved.
- */
-
 namespace EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues;
 
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Projects\Project;

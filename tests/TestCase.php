@@ -10,6 +10,7 @@ namespace EncoreDigitalGroup\Atlassian\Tests;
 use EncoreDigitalGroup\Atlassian\Providers\AtlassianServiceProvider;
 use EncoreDigitalGroup\Atlassian\Services\Jira\JiraField;
 use EncoreDigitalGroup\Atlassian\Services\Jira\JiraProject;
+use EncoreDigitalGroup\Atlassian\Services\Jira\JiraServiceDesk;
 use Illuminate\Http\Client\Factory as HttpFactory;
 use Illuminate\Support\Facades\Facade;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
@@ -44,6 +45,8 @@ class TestCase extends OrchestraTestCase
         $this->setupGetIssue();
         $this->setupCreateIssue();
         $this->setupGetAllFields();
+        $this->setupCreateServiceDeskRequest();
+        $this->setupGetServiceDeskRequest();
     }
 
     private function setupSearchIssues(): void
@@ -139,6 +142,67 @@ class TestCase extends OrchestraTestCase
                     "name" => "TEST PROJECT",
                     "projectTypeKey" => "software",
                     "simplified" => false,
+                ],
+            ],
+        ];
+    }
+
+    private function setupCreateServiceDeskRequest(): void
+    {
+        HttpClient::fake([
+            self::HOSTNAME . JiraServiceDesk::SERVICE_DESK_REQUEST_ENDPOINT => HttpClient::response($this->getFakeServiceDeskRequest()),
+        ]);
+    }
+
+    private function setupGetServiceDeskRequest(): void
+    {
+        HttpClient::fake([
+            self::HOSTNAME . JiraServiceDesk::SERVICE_DESK_REQUEST_ENDPOINT . '/SD-1' => HttpClient::response($this->getFakeServiceDeskRequest()),
+        ]);
+    }
+
+    private function getFakeServiceDeskRequest(): array
+    {
+        return [
+            'issueId' => '10001',
+            'issueKey' => 'SD-1',
+            'requestTypeId' => '25',
+            'serviceDeskId' => '10',
+            'createdDate' => [
+                'iso8601' => '2025-02-08T10:00:00+0000',
+                'jira' => '2025-02-08T10:00:00.000+0000',
+                'friendly' => '08/Feb/25 10:00 AM',
+                'epochMillis' => 1707390000000,
+            ],
+            'reporter' => [
+                'accountId' => '5b10a2844c20165700ede21g',
+                'name' => 'test.user',
+                'displayName' => 'Test User',
+                'emailAddress' => 'test.user@example.com',
+                'active' => true,
+                'timeZone' => 'Australia/Sydney',
+            ],
+            'requestFieldValues' => [
+                [
+                    'fieldId' => 'summary',
+                    'label' => 'What do you need?',
+                    'value' => 'Test Service Desk Request',
+                ],
+                [
+                    'fieldId' => 'description',
+                    'label' => 'Why do you need this?',
+                    'value' => 'This is a test service desk request',
+                ],
+            ],
+            'sla' => [
+                [
+                    'id' => '1',
+                    'name' => 'Time to resolution',
+                    'completedCycle' => false,
+                    'remainingTime' => [
+                        'millis' => 28800000,
+                        'friendly' => '8h',
+                    ],
                 ],
             ],
         ];
