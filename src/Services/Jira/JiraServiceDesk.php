@@ -5,6 +5,7 @@ namespace EncoreDigitalGroup\Atlassian\Services\Jira;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Common\InteractsWithAtlassian;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\ServiceDesk\ServiceDeskRequest;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\ServiceDesk\Traits\MapServiceDeskRequests;
+use EncoreDigitalGroup\Atlassian\Services\Jira\Resources\ServiceDeskCustomers;
 
 /**
  * Service for interacting with Jira Service Desk API.
@@ -44,6 +45,22 @@ class JiraServiceDesk
         $responseData = json_decode($response->body());
 
         return $this->mapServiceDeskRequest($responseData);
+    }
+
+    /**
+     * Access customer management operations
+     *
+     * Returns a sub-resource for managing Service Desk customers.
+     *
+     * @return ServiceDeskCustomers The customer management sub-resource
+     *
+     * @api
+     *
+     * @experimental
+     */
+    public function customers(): ServiceDeskCustomers
+    {
+        return new ServiceDeskCustomers($this->client(), $this->hostname);
     }
 
     /**

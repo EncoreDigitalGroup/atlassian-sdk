@@ -47,6 +47,11 @@ class TestCase extends OrchestraTestCase
         $this->setupGetAllFields();
         $this->setupCreateServiceDeskRequest();
         $this->setupGetServiceDeskRequest();
+        $this->setupCreateCustomer();
+        $this->setupListCustomers();
+        $this->setupAddCustomers();
+        $this->setupRemoveCustomers();
+        $this->setupRevokePortalAccess();
     }
 
     private function setupSearchIssues(): void
@@ -202,6 +207,106 @@ class TestCase extends OrchestraTestCase
                     'remainingTime' => [
                         'millis' => 28800000,
                         'friendly' => '8h',
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    private function setupCreateCustomer(): void
+    {
+        HttpClient::fake([
+            self::HOSTNAME . '/rest/servicedeskapi/customer' => HttpClient::response($this->getFakeCustomer()),
+        ]);
+    }
+
+    private function setupListCustomers(): void
+    {
+        HttpClient::fake([
+            self::HOSTNAME . '/rest/servicedeskapi/servicedesk/*/customer*' => HttpClient::response($this->getFakeCustomerList()),
+        ]);
+    }
+
+    private function setupAddCustomers(): void
+    {
+        HttpClient::fake([
+            self::HOSTNAME . '/rest/servicedeskapi/servicedesk/*/customer' => HttpClient::response(null, 204),
+        ]);
+    }
+
+    private function setupRemoveCustomers(): void
+    {
+        HttpClient::fake([
+            self::HOSTNAME . '/rest/servicedeskapi/servicedesk/*/customer' => HttpClient::response(null, 204),
+        ]);
+    }
+
+    private function setupRevokePortalAccess(): void
+    {
+        HttpClient::fake([
+            self::HOSTNAME . '/rest/servicedeskapi/customer/user/*/revoke-portal-only-access' => HttpClient::response(null, 204),
+        ]);
+    }
+
+    private function getFakeCustomer(): array
+    {
+        return [
+            'accountId' => '5b10a2844c20165700ede21g',
+            'name' => 'john.doe',
+            'key' => 'john.doe',
+            'displayName' => 'John Doe',
+            'emailAddress' => 'john.doe@example.com',
+            'active' => true,
+            'timeZone' => 'America/New_York',
+            '_links' => [
+                'jiraRest' => 'https://example.atlassian.net/rest/api/2/user?accountId=5b10a2844c20165700ede21g',
+                'avatarUrls' => [
+                    '48x48' => 'https://example.atlassian.net/avatar.png',
+                ],
+                'self' => 'https://example.atlassian.net/rest/api/2/user?accountId=5b10a2844c20165700ede21g',
+            ],
+        ];
+    }
+
+    private function getFakeCustomerList(): array
+    {
+        return [
+            '_expands' => [],
+            'size' => 2,
+            'start' => 0,
+            'limit' => 50,
+            'isLastPage' => true,
+            '_links' => [
+                'base' => 'https://example.atlassian.net/rest/servicedeskapi',
+                'context' => 'context',
+                'next' => 'https://example.atlassian.net/rest/servicedeskapi/servicedesk/10/customer?start=2',
+                'prev' => '',
+            ],
+            'values' => [
+                [
+                    'accountId' => '5b10a2844c20165700ede21g',
+                    'name' => 'john.doe',
+                    'key' => 'john.doe',
+                    'displayName' => 'John Doe',
+                    'emailAddress' => 'john.doe@example.com',
+                    'active' => true,
+                    'timeZone' => 'America/New_York',
+                    '_links' => [
+                        'jiraRest' => 'https://example.atlassian.net/rest/api/2/user?accountId=5b10a2844c20165700ede21g',
+                        'self' => 'https://example.atlassian.net/rest/api/2/user?accountId=5b10a2844c20165700ede21g',
+                    ],
+                ],
+                [
+                    'accountId' => '5b10a2844c20165700ede22h',
+                    'name' => 'jane.smith',
+                    'key' => 'jane.smith',
+                    'displayName' => 'Jane Smith',
+                    'emailAddress' => 'jane.smith@example.com',
+                    'active' => true,
+                    'timeZone' => 'Europe/London',
+                    '_links' => [
+                        'jiraRest' => 'https://example.atlassian.net/rest/api/2/user?accountId=5b10a2844c20165700ede22h',
+                        'self' => 'https://example.atlassian.net/rest/api/2/user?accountId=5b10a2844c20165700ede22h',
                     ],
                 ],
             ],
