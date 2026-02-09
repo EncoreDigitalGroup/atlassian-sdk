@@ -42,12 +42,20 @@ trait MapServiceDeskRequests
 
     /**
      * Map field values from API response.
+     *
+     * The API returns requestFieldValues as an array of objects with:
+     * - fieldId: The field identifier
+     * - label: The field label
+     * - value: The field value
+     * - renderedValue: (optional) Rendered HTML value
      */
     private function mapFieldValues(mixed $data, ServiceDeskRequest $request): void
     {
-        if (isset($data->requestFieldValues)) {
-            foreach ($data->requestFieldValues as $fieldId => $value) {
-                $request->requestFieldValues->setField($fieldId, $value);
+        if (isset($data->requestFieldValues) && is_array($data->requestFieldValues)) {
+            foreach ($data->requestFieldValues as $fieldValue) {
+                if (isset($fieldValue->fieldId) && isset($fieldValue->value)) {
+                    $request->requestFieldValues->setField($fieldValue->fieldId, $fieldValue->value);
+                }
             }
         }
     }

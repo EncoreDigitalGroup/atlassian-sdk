@@ -11,13 +11,13 @@
 use EncoreDigitalGroup\Atlassian\Services\Jira\JiraServiceDesk;
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\ServiceDesk\ServiceDeskRequest;
 
-it('make returns instance of JiraServiceDesk', function () {
+test('make returns instance of JiraServiceDesk', function () {
     $service = JiraServiceDesk::make();
 
     expect($service)->toBeInstanceOf(JiraServiceDesk::class);
 });
 
-it('createRequest returns ServiceDeskRequest with valid data', function () {
+test('createRequest returns ServiceDeskRequest with valid data', function () {
     $service = JiraServiceDesk::make();
 
     $request = new ServiceDeskRequest();
@@ -43,7 +43,7 @@ it('createRequest returns ServiceDeskRequest with valid data', function () {
         ->and($result->sla[0]->name)->toBe('Time to resolution');
 });
 
-it('getRequest returns ServiceDeskRequest for existing request', function () {
+test('getRequest returns ServiceDeskRequest for existing request', function () {
     $service = JiraServiceDesk::make();
 
     $result = $service->getRequest('SD-1');

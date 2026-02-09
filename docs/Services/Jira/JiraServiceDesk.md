@@ -114,7 +114,9 @@ foreach ($request->sla as $sla) {
 
 The `ServiceDeskRequestFieldValues` object provides a flexible way to work with both standard and custom fields.
 
-### Setting Field Values
+### Setting Field Values (for Request Creation)
+
+When creating a request, field values are sent as a simple object/map:
 
 ```php
 $request = new ServiceDeskRequest();
@@ -128,7 +130,9 @@ $request->requestFieldValues->setField('customfield_10001', 'Value 1');
 $request->requestFieldValues->setField('customfield_10002', 'Value 2');
 ```
 
-### Getting Field Values
+### Getting Field Values (from Response)
+
+When retrieving a request, the API returns field values as an array of objects with `fieldId`, `label`, and `value` properties. The SDK automatically converts this to a simple key-value format:
 
 ```php
 $summary = $request->requestFieldValues->getField('summary');
@@ -137,6 +141,12 @@ $customValue = $request->requestFieldValues->getField('customfield_10001');
 // Returns null if field doesn't exist
 $nonExistent = $request->requestFieldValues->getField('nonexistent'); // null
 ```
+
+**Note:** The API response format differs from the request format:
+- **Request payload:** `{"summary": "value", "description": "value"}` (object/map)
+- **Response payload:** `[{"fieldId": "summary", "label": "...", "value": "..."}, ...]` (array of objects)
+
+The SDK handles this conversion automatically.
 
 ## Finding Service Desk and Request Type IDs
 

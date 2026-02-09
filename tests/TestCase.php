@@ -183,8 +183,16 @@ class TestCase extends OrchestraTestCase
                 'timeZone' => 'Australia/Sydney',
             ],
             'requestFieldValues' => [
-                'summary' => 'Test Service Desk Request',
-                'description' => 'This is a test service desk request',
+                [
+                    'fieldId' => 'summary',
+                    'label' => 'What do you need?',
+                    'value' => 'Test Service Desk Request',
+                ],
+                [
+                    'fieldId' => 'description',
+                    'label' => 'Why do you need this?',
+                    'value' => 'This is a test service desk request',
+                ],
             ],
             'sla' => [
                 [
