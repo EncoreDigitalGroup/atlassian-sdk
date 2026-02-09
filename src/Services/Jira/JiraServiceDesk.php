@@ -48,6 +48,22 @@ class JiraServiceDesk
     }
 
     /**
+     * Access customer management operations
+     *
+     * Returns a sub-resource for managing Service Desk customers.
+     *
+     * @return ServiceDeskCustomers The customer management sub-resource
+     *
+     * @api
+     *
+     * @experimental
+     */
+    public function customers(): ServiceDeskCustomers
+    {
+        return new ServiceDeskCustomers($this->client(), $this->hostname);
+    }
+
+    /**
      * Prepare request payload for API submission.
      */
     private function prepareRequestPayload(ServiceDeskRequest $request): array
@@ -63,20 +79,5 @@ class JiraServiceDesk
         }
 
         return $payload;
-    }
-
-    /**
-     * Access customer management operations
-     *
-     * Returns a sub-resource for managing Service Desk customers.
-     *
-     * @return ServiceDeskCustomers The customer management sub-resource
-     *
-     * @api
-     * @experimental
-     */
-    public function customers(): ServiceDeskCustomers
-    {
-        return new ServiceDeskCustomers($this->client(), $this->hostname);
     }
 }

@@ -14,6 +14,7 @@ use Illuminate\Http\Client\PendingRequest;
  * listing, adding to service desks, removing, and revoking access.
  *
  * @api
+ *
  * @experimental
  */
 class ServiceDeskCustomers
@@ -21,12 +22,12 @@ class ServiceDeskCustomers
     use MapCustomers;
 
     /**
-     * @param PendingRequest $client The authenticated HTTP client
-     * @param string $hostname The Atlassian instance hostname
+     * @param  PendingRequest  $client  The authenticated HTTP client
+     * @param  string  $hostname  The Atlassian instance hostname
      */
     public function __construct(
         private PendingRequest $client,
-        private string         $hostname,
+        private string $hostname,
     ) {}
 
     /**
@@ -34,12 +35,13 @@ class ServiceDeskCustomers
      *
      * Requires Jira Administrator global permission.
      *
-     * @param string $displayName The display name for the customer
-     * @param string $email The email address for the customer
-     * @param bool $strictConflictStatusCode Whether to return 409 on conflict instead of 200
+     * @param  string  $displayName  The display name for the customer
+     * @param  string  $email  The email address for the customer
+     * @param  bool  $strictConflictStatusCode  Whether to return 409 on conflict instead of 200
      * @return Customer The created customer
      *
      * @api
+     *
      * @experimental
      */
     public function create(string $displayName, string $email, bool $strictConflictStatusCode = false): Customer
@@ -53,9 +55,9 @@ class ServiceDeskCustomers
 
         $response = $this->client
             ->post($url, [
-                    'displayName' => $displayName,
-                    'email' => $email,
-                ] + (!empty($query) ? $query : []));
+                'displayName' => $displayName,
+                'email' => $email,
+            ] + (!empty($query) ? $query : []));
 
         return $this->mapCustomer($response->json());
     }
@@ -65,13 +67,14 @@ class ServiceDeskCustomers
      *
      * Returns a list of customers for a service desk with optional filtering by name or email.
      *
-     * @param string $serviceDeskId The ID of the service desk
-     * @param string|null $query Filter customers by name or email (optional)
-     * @param int $start The starting index (default: 0)
-     * @param int $limit The maximum number of results (default: 50)
+     * @param  string  $serviceDeskId  The ID of the service desk
+     * @param  string|null  $query  Filter customers by name or email (optional)
+     * @param  int  $start  The starting index (default: 0)
+     * @param  int  $limit  The maximum number of results (default: 50)
      * @return PagedCustomerList The paginated list of customers
      *
      * @api
+     *
      * @experimental
      */
     public function list(string $serviceDeskId, ?string $query = null, int $start = 0, int $limit = 50): PagedCustomerList
@@ -98,11 +101,11 @@ class ServiceDeskCustomers
      * Adds one or more existing customers to a service desk.
      * Duplicate account IDs are automatically removed.
      *
-     * @param string $serviceDeskId The ID of the service desk
-     * @param array<string> $accountIds Array of customer account IDs to add
-     * @return void
+     * @param  string  $serviceDeskId  The ID of the service desk
+     * @param  array<string>  $accountIds  Array of customer account IDs to add
      *
      * @api
+     *
      * @experimental
      */
     public function add(string $serviceDeskId, array $accountIds): void
@@ -121,11 +124,11 @@ class ServiceDeskCustomers
      * The service desk must have closed access enabled.
      * Duplicate account IDs are automatically removed.
      *
-     * @param string $serviceDeskId The ID of the service desk
-     * @param array<string> $accountIds Array of customer account IDs to remove
-     * @return void
+     * @param  string  $serviceDeskId  The ID of the service desk
+     * @param  array<string>  $accountIds  Array of customer account IDs to remove
      *
      * @api
+     *
      * @experimental
      */
     public function remove(string $serviceDeskId, array $accountIds): void
@@ -142,10 +145,10 @@ class ServiceDeskCustomers
      *
      * Removes the portal-only access permission for a customer account.
      *
-     * @param string $accountId The account ID of the customer
-     * @return void
+     * @param  string  $accountId  The account ID of the customer
      *
      * @api
+     *
      * @experimental
      */
     public function revokePortalAccess(string $accountId): void

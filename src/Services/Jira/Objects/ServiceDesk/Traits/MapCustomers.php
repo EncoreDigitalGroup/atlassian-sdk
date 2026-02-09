@@ -15,7 +15,7 @@ trait MapCustomers
     /**
      * Maps API response data to a Customer object
      *
-     * @param mixed $data The API response data
+     * @param  mixed  $data  The API response data
      * @return Customer The mapped customer object
      */
     private function mapCustomer(mixed $data): Customer
@@ -35,7 +35,7 @@ trait MapCustomers
     /**
      * Maps API response data to a PagedCustomerList object
      *
-     * @param mixed $data The API response data
+     * @param  mixed  $data  The API response data
      * @return PagedCustomerList The mapped paged customer list
      */
     private function mapPagedCustomerList(mixed $data): PagedCustomerList
