@@ -1,6 +1,5 @@
 <?php
 
-
 namespace EncoreDigitalGroup\Atlassian\Helpers;
 
 use EncoreDigitalGroup\StdLib\Exceptions\NullExceptions\ClassPropertyNullException;

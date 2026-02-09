@@ -1,6 +1,5 @@
 <?php
 
-
 namespace EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues;
 
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Projects\Project;

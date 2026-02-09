@@ -1,6 +1,5 @@
 <?php
 
-
 namespace EncoreDigitalGroup\Atlassian\Services\Jira;
 
 use EncoreDigitalGroup\Atlassian\Services\Jira\Common\InteractsWithAtlassian;
@@ -14,6 +13,7 @@ use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\ServiceDesk\Traits\MapSer
  * Atlassian Service Desk REST API.
  *
  * @api
+ *
  * @experimental
  */
 class JiraServiceDesk

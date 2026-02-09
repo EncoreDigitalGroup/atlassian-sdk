@@ -1,6 +1,5 @@
 <?php
 
-
 namespace EncoreDigitalGroup\Atlassian;
 
 class AtlassianHelper

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace EncoreDigitalGroup\Atlassian\Providers;
 
 use Illuminate\Support\ServiceProvider;

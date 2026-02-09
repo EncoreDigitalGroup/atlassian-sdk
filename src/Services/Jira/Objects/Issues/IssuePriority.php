@@ -1,6 +1,5 @@
 <?php
 
-
 namespace EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Issues;
 
 class IssuePriority

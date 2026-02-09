@@ -1,6 +1,5 @@
 <?php
 
-
 namespace EncoreDigitalGroup\Atlassian\Services\Jira\Objects\JQL\Traits;
 
 use EncoreDigitalGroup\Atlassian\Services\Jira\Common\InteractsWithAtlassian;

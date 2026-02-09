@@ -1,6 +1,5 @@
 <?php
 
-
 namespace EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Fields\Traits;
 
 use EncoreDigitalGroup\Atlassian\Services\Jira\Objects\Fields\Field;

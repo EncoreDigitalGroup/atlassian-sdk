@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  * Copyright (c) 2025 Encore Digital Group.
  * All Right Reserved.
@@ -26,7 +25,7 @@ trait MapServiceDeskRequests
      */
     private function mapServiceDeskRequest(mixed $data): ServiceDeskRequest
     {
-        $request = new ServiceDeskRequest();
+        $request = new ServiceDeskRequest;
         $request->issueId = $data->issueId ?? null;
         $request->issueKey = $data->issueKey ?? null;
         $request->requestTypeId = $data->requestTypeId ?? null;
@@ -53,7 +52,7 @@ trait MapServiceDeskRequests
     {
         if (isset($data->requestFieldValues) && is_array($data->requestFieldValues)) {
             foreach ($data->requestFieldValues as $fieldValue) {
-                if (isset($fieldValue->fieldId) && isset($fieldValue->value)) {
+                if (isset($fieldValue->fieldId, $fieldValue->value)) {
                     $request->requestFieldValues->setField($fieldValue->fieldId, $fieldValue->value);
                 }
             }
@@ -66,7 +65,7 @@ trait MapServiceDeskRequests
     private function mapReporter(mixed $data, ServiceDeskRequest $request): void
     {
         if (isset($data->reporter)) {
-            $reporter = new ServiceDeskRequestParticipant();
+            $reporter = new ServiceDeskRequestParticipant;
             $reporter->accountId = $data->reporter->accountId ?? null;
             $reporter->name = $data->reporter->name ?? null;
             $reporter->displayName = $data->reporter->displayName ?? null;
@@ -84,11 +83,11 @@ trait MapServiceDeskRequests
     {
         if (isset($data->sla) && is_array($data->sla)) {
             foreach ($data->sla as $slaData) {
-                $sla = new ServiceDeskRequestSla();
+                $sla = new ServiceDeskRequestSla;
                 $sla->id = $slaData->id ?? null;
                 $sla->name = $slaData->name ?? null;
                 $sla->completedCycle = $slaData->completedCycle ?? null;
-                $sla->remainingTime = isset($slaData->remainingTime) ? (array)$slaData->remainingTime : null;
+                $sla->remainingTime = isset($slaData->remainingTime) ? (array) $slaData->remainingTime : null;
                 $request->sla[] = $sla;
             }
         }

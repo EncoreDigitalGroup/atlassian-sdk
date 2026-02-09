@@ -1,6 +1,5 @@
 <?php
 
-
 namespace EncoreDigitalGroup\Atlassian\Services\Jira\Common;
 
 use EncoreDigitalGroup\Atlassian\AtlassianHelper;

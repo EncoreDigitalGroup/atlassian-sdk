@@ -1,6 +1,5 @@
 <?php
 
-
 use Rector\CodeQuality\Rector\Equal\UseIdenticalOverEqualWithSameTypeRector;
 use Rector\CodeQuality\Rector\FuncCall\CompactToVariablesRector;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;
