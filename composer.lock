@@ -2086,16 +2086,16 @@
         },
         {
             "name": "laravel/serializable-closure",
-            "version": "v2.0.9",
+            "version": "v2.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "8f631589ab07b7b52fead814965f5a800459cb3e"
+                "reference": "870fc81d2f879903dfc5b60bf8a0f94a1609e669"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/8f631589ab07b7b52fead814965f5a800459cb3e",
-                "reference": "8f631589ab07b7b52fead814965f5a800459cb3e",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/870fc81d2f879903dfc5b60bf8a0f94a1609e669",
+                "reference": "870fc81d2f879903dfc5b60bf8a0f94a1609e669",
                 "shasum": ""
             },
             "require": {
@@ -2143,7 +2143,7 @@
                 "issues": "https://github.com/laravel/serializable-closure/issues",
                 "source": "https://github.com/laravel/serializable-closure"
             },
-            "time": "2026-02-03T06:55:34+00:00"
+            "time": "2026-02-20T19:59:49+00:00"
         },
         {
             "name": "league/commonmark",
@@ -2987,16 +2987,16 @@
         },
         {
             "name": "nette/schema",
-            "version": "v1.3.4",
+            "version": "v1.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/schema.git",
-                "reference": "086497a2f34b82fede9b5a41cc8e131d087cd8f7"
+                "reference": "f0ab1a3cda782dbc5da270d28545236aa80c4002"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/schema/zipball/086497a2f34b82fede9b5a41cc8e131d087cd8f7",
-                "reference": "086497a2f34b82fede9b5a41cc8e131d087cd8f7",
+                "url": "https://api.github.com/repos/nette/schema/zipball/f0ab1a3cda782dbc5da270d28545236aa80c4002",
+                "reference": "f0ab1a3cda782dbc5da270d28545236aa80c4002",
                 "shasum": ""
             },
             "require": {
@@ -3004,8 +3004,10 @@
                 "php": "8.1 - 8.5"
             },
             "require-dev": {
+                "nette/phpstan-rules": "^1.0",
                 "nette/tester": "^2.6",
-                "phpstan/phpstan": "^2.0@stable",
+                "phpstan/extension-installer": "^1.4@stable",
+                "phpstan/phpstan": "^2.1.39@stable",
                 "tracy/tracy": "^2.8"
             },
             "type": "library",
@@ -3046,9 +3048,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/schema/issues",
-                "source": "https://github.com/nette/schema/tree/v1.3.4"
+                "source": "https://github.com/nette/schema/tree/v1.3.5"
             },
-            "time": "2026-02-08T02:54:00+00:00"
+            "time": "2026-02-23T03:47:12+00:00"
         },
         {
             "name": "nette/utils",
@@ -3230,29 +3232,29 @@
         },
         {
             "name": "phpgenesis/common",
-            "version": "v1.9.4",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPGenesis/Common.git",
-                "reference": "617ed26be587c6c4013ec46f0fb7b494b3eed22e"
+                "reference": "378047e0d9d774cc3b8ddbbc8574fea56421b29f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPGenesis/Common/zipball/617ed26be587c6c4013ec46f0fb7b494b3eed22e",
-                "reference": "617ed26be587c6c4013ec46f0fb7b494b3eed22e",
+                "url": "https://api.github.com/repos/PHPGenesis/Common/zipball/378047e0d9d774cc3b8ddbbc8574fea56421b29f",
+                "reference": "378047e0d9d774cc3b8ddbbc8574fea56421b29f",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.0",
                 "composer/composer": "^2.0",
                 "encoredigitalgroup/stdlib": "^2.0",
-                "illuminate/collections": "^10|^11|^12",
-                "illuminate/database": "^10|^11|^12",
-                "illuminate/support": "^10|^11|^12",
+                "illuminate/collections": "^10|^11|^12|^13",
+                "illuminate/database": "^10|^11|^12|^13",
+                "illuminate/support": "^10|^11|^12|^13",
                 "php": "^8.3|^8.4|^8.5"
             },
             "require-dev": {
-                "laravel/framework": "^10|^11|^12"
+                "laravel/framework": "^10|^11|^12|^13"
             },
             "type": "library",
             "autoload": {
@@ -3269,28 +3271,28 @@
             ],
             "description": "Shared Functionality for PHPGenesis",
             "support": {
-                "source": "https://github.com/PHPGenesis/Common/tree/v1.9.4"
+                "source": "https://github.com/PHPGenesis/Common/tree/v1.10.0"
             },
-            "time": "2025-12-11T03:43:53+00:00"
+            "time": "2026-02-20T14:44:42+00:00"
         },
         {
             "name": "phpgenesis/http",
-            "version": "v1.9.4",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPGenesis/Http.git",
-                "reference": "397d97fc806de970a92edadbacc60c32a1abcd67"
+                "reference": "a76152880733a07168f24d612a3699a1ed3b551f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPGenesis/Http/zipball/397d97fc806de970a92edadbacc60c32a1abcd67",
-                "reference": "397d97fc806de970a92edadbacc60c32a1abcd67",
+                "url": "https://api.github.com/repos/PHPGenesis/Http/zipball/a76152880733a07168f24d612a3699a1ed3b551f",
+                "reference": "a76152880733a07168f24d612a3699a1ed3b551f",
                 "shasum": ""
             },
             "require": {
-                "illuminate/container": "^10|^11|^12",
-                "illuminate/http": "^10|^11|^12",
-                "illuminate/support": "^10|^11|^12",
+                "illuminate/container": "^10|^11|^12|^13",
+                "illuminate/http": "^10|^11|^12|^13",
+                "illuminate/support": "^10|^11|^12|^13",
                 "php": "^8.3|^8.4|^8.5",
                 "phpgenesis/common": "self.version"
             },
@@ -3306,9 +3308,9 @@
             ],
             "description": "PHPGenesis Implementation of Laravel's HTTP Client",
             "support": {
-                "source": "https://github.com/PHPGenesis/Http/tree/v1.9.4"
+                "source": "https://github.com/PHPGenesis/Http/tree/v1.10.0"
             },
-            "time": "2025-12-11T03:43:50+00:00"
+            "time": "2026-02-20T14:44:40+00:00"
         },
         {
             "name": "phpoption/phpoption",
